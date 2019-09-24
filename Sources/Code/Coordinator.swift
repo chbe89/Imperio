@@ -178,13 +178,16 @@ open class Coordinator {
         switch presentationStyle {
         case .modal(let completion):
             if let navigationCtrl = viewCtrl as? UINavigationController ?? viewCtrl.navigationController {
+                viewCtrl.modalPresentationStyle = .fullScreen
                 presentingViewController?.present(navigationCtrl, animated: animated, completion: completion)
             } else if !navigation {
                 // a view controller without navigation stack is passed, .modal style is chosen but navigation is false
+                viewCtrl.modalPresentationStyle = .fullScreen
                 presentingViewController?.present(viewCtrl, animated: animated, completion: completion)
             } else {
                 // a view controller without navigation stack is passed, .modal style is chosen and navigation is true
                 let navigationCtrl = UINavigationController(rootViewController: viewCtrl)
+                navigationCtrl.modalPresentationStyle = .fullScreen
                 presentingViewController?.present(navigationCtrl, animated: animated, completion: completion)
             }
 
